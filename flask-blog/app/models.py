@@ -3,16 +3,15 @@ from flask_login import UserMixin
 
 class User(UserMixin,db.Model):
     __table__='users'
-    id=db.column(db.Integer,primary_key=True)
-    name=db.column(db.string(255),index=True)
-    email=db.column(db.text(),unique=True)
+    id=db.Column(db.Integer,primary_key=True)
+    name=db.Column(db.string(255),index=True)
+    email=db.Column(db.text(),unique=True)
     blog=db.relationship('Blogpost',bakref='blogpost.id',lazy='dynamic')
     comment=db.relationship('Comments',bakref='comment',lazy='dynamic')
+    pass_secure=db.Column(db.string(55))
 
     #method to save new user
-    def user_save(self):
-        db.session.add(self)
-        db.session.commit()
+
 
 
 
@@ -42,3 +41,10 @@ class Comments(db.Model):
     content=db.column(db.text(),index=True)
     user_id=db.column(db.Integer,db.ForeigKey('users.id'))
     blogpost_id=db.column(db.Integer,db.ForeigKey('blogpost.id'))
+
+    #a method to save a new comments
+    def new_comment(self):
+        db.session.add(self)
+        db.session.commit()
+
+    #a method to delete comments
