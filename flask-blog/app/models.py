@@ -9,9 +9,12 @@ class User(UserMixin,db.Model):
     blog=db.relationship('Blogpost',bakref='blogpost.id',lazy='dynamic')
     comment=db.relationship('Comments',bakref='comment',lazy='dynamic')
 
+    #method to save new user
     def user_save(self):
         db.session.add(self)
         db.session.commit()
+
+
 
 
 
@@ -24,6 +27,11 @@ class Blogpost(db.Model):
     date_posted=db.column(db.DateTime(),default=datetime.utcnow)
     user_id=db.column(db.Integer,db.ForeigKey('users.id'))
     comments=db.relationship('Comments',backref='comment')
+
+    #method to save a new blogpost
+    def new_blogpost(self):
+        db.session.add(self)
+        db.session.commit()
 
 
 
