@@ -29,10 +29,17 @@ def post('/post'):
     return render_template('post.html',postform=form)
 
 
-    
+@main.route('/post/comment/<int:post_id>')
+def comment(post_id):
+    posts=Comments.query.filter_by(blogpost_id=post_id).all()
+     title='comments section'
+
+     return render_template('comment.html',title=title,posts=posts)
 
 
-@main.route('/post/comment')
+
+
+@main.route('/post/new_comment/<int:post_id>',methods=['GET','POST'])
 def new_comment(post_id):
     post=Blogpost.query.filter_by(id=post_id).first()
     form=commentform()
