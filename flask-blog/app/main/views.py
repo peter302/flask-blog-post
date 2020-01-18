@@ -49,11 +49,11 @@ def new_comment(post_id):
 
     if form.validate_on_submit():
         content=form.content.data
-        new_comment=Comments(content=content,blogpost_id=post_id,user_id=current_user.id)
+        new_comment=Comments(content=content,blogpost_id=post.id)
 
         new_comment.comment_save()
 
-        return redirect(url_for('main.comment'))
+        return redirect(url_for('main.view_comment'))
     title='make a new comment here'
 
     return render_template('new_comment.html',title=title,post=post,commentform=form)
