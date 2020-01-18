@@ -1,5 +1,5 @@
 from flask import render_template,url_for,request,abort,redirect
-from .models import Blogpost,User,Comments
+from ..models import Blogpost,User,Comments
 from .import main
 from forms import CommentForm,PostForm
 from flask_login import login_required,current_user
@@ -14,6 +14,7 @@ def index():
     return render_template('index.html',title=title,posts=posts)
 
 @main.route('/post',methods=['GET','POST'])
+@login_required
 def post():
     form=PostForm()
 
@@ -30,6 +31,7 @@ def post():
 
 
 @main.route('/post/comment/<int:post_id>')
+@login_required
 def view_comment(post_id):
     post=Blogpost.query.filter_by(id=post_id)
     comments=Comments.query.filter_by(blogpost_id=post_id).all()
