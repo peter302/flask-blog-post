@@ -1,7 +1,7 @@
 from flask import render_template,url_for,request,abort,redirect
 from .models import Blogpost,User,Comments
 from .import main
-from forms import commentform,postform
+from forms import CommentForm,PostForm
 from flask_login import login_required,current_user
 
 @main.route('/')
@@ -15,33 +15,36 @@ def index():
 
 @main.route('/post')
 def post():
-    form=postforms()
+    form=PostForm()
 
     if form.validate_on_submit():
         title=form.title.data
         content=form.content.data
         date_posted=form.date_posted.data
 
-        new_post=Blogpost(title=title,content=content,date_posted=date_posted)
+        new_post=Blogpost(title=title,content=content)
         new_post.post_save()
-    title='make a new blog here'
         return redirect(url_for('main.index'))
-    return render_template('post.html',postform=form)
+    title='make a new blog here'
+    return render_template('post.html',title=title,postform=form)
 
 
 @main.route('/post/comment/<int:post_id>')
-def comment(post_id):
+def view_comment(post_id):
+    post=Blogpost.query.filter_by(id=post_id)
     comments=Comments.query.filter_by(blogpost_id=post_id).all()
-     title='comments section for that post'
+    if not comments:
+        abort(404)
+    title=f'comments section for {{post.title}}'
 
-     return render_template('comment.html',title=title,comments=comments)
+     return render_template('comment.html',title=title,post=post,comments=comments)
 
 
 
 
 @main.route('/post/new_comment/<int:post_id>',methods=['GET','POST'])
 def new_comment(post_id):
-    post=Blogpost.query.filter_by(id=post_id).first()
+    post=Blogpost.query.filter_by(id=post_id)
     form=commentform()
 
     if form.validate_on_submit():
