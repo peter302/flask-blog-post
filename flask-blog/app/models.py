@@ -2,11 +2,14 @@
 from flask_login import UserMixin
 
 class User(UserMixin,db.Model):
-    __table__='users'
-    id=db.Column(db.Integer,primary_key=True)
-    name=db.Column(db.string(255),index=True)
-    email=db.Column(db.text(),unique=True)
-    pass_secure=db.Column(db.string(55))
+    __tablename__ = 'users'
+
+    id = db.Column(db.Integer,primary_key = True)
+    username = db.Column(db.String(255),index = True)
+    email = db.Column(db.String(255),unique = True,index = True)
+    bio = db.Column(db.String(255))
+    profile_pic_path = db.Column(db.String())
+    password_secure = db.Column(db.String(255))
 
     #method to save new user
 
@@ -17,7 +20,7 @@ class User(UserMixin,db.Model):
 
 
 class Blogpost(db.Model):
-    __table__='blogpost'
+    __tablename__='blogpost'
     id=db.column(db.Integer,primary_key=True)
     title=db.column(db.string(255),index=True)
     content=db.column(db.text())
@@ -31,7 +34,7 @@ class Blogpost(db.Model):
 
 
 class Comments(db.Model):
-    __table__='comment'
+    __tablename__='comment'
 
     id=db.column(db.Integer,primary_key=True)
     content=db.column(db.text(),index=True)
