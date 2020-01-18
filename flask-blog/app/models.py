@@ -28,7 +28,7 @@ class Blogpost(db.Model):
     comments=db.relationship('Comments',backref='comment')
 
     #method to save a new blogpost
-    def new_blogpost(self):
+    def post_save(self):
         db.session.add(self)
         db.session.commit()
 
@@ -43,7 +43,7 @@ class Comments(db.Model):
     blogpost_id=db.column(db.Integer,db.ForeigKey('blogpost.id'))
 
     #a method to save a new comments
-    def new_comment(self):
+    def comment_save(self):
         db.session.add(self)
         db.session.commit()
 

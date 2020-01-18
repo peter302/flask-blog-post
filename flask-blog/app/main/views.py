@@ -14,7 +14,7 @@ def index():
     return render_template('index.html',title=title,posts=posts)
 
 @main.route('/post')
-def post('/post'):
+def post():
     form=postforms()
 
     if form.validate_on_submit():
@@ -24,17 +24,17 @@ def post('/post'):
 
         new_post=Blogpost(title=title,content=content,date_posted=date_posted)
         new_post.post_save()
-
+    title='make a new blog here'
         return redirect(url_for('main.index'))
     return render_template('post.html',postform=form)
 
 
 @main.route('/post/comment/<int:post_id>')
 def comment(post_id):
-    posts=Comments.query.filter_by(blogpost_id=post_id).all()
-     title='comments section'
+    comments=Comments.query.filter_by(blogpost_id=post_id).all()
+     title='comments section for that post'
 
-     return render_template('comment.html',title=title,posts=posts)
+     return render_template('comment.html',title=title,comments=comments)
 
 
 
