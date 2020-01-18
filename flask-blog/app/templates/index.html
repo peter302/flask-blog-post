@@ -1,0 +1,16 @@
+<!-- Content block -->
+{% block content %}
+
+<!-- Popular movie -->
+  <h3>{{title}}</h3
+  <div class='container'>
+  {%for post in posts%}
+
+  <ul>
+    <li>{{post.title}}</li>
+    <li>{{post.content}}</li>
+  </ul>
+  {%endfor%}
+  </div>
+
+{% endblock%}
