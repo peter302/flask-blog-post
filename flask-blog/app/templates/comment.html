@@ -11,12 +11,12 @@
              <p><a href>Add a Comment</a></p>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4",style='background-color:blue;opacity:0.7;'>
           {% for comment in comments %}
-            <div class='card'>
+            <div class='card'style='background-color:green;color:white'>
               <div class='card-body'>{{ comment.content }}</div>
               <div class='card-footer'><p><a href=''>delete Comment</a></p></div>
-            </div>  
+            </div>
           {% endfor %}
         </div>
 

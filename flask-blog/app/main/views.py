@@ -13,7 +13,7 @@ def index():
 
     return render_template('index.html',title=title,posts=posts)
 
-@main.route('/post')
+@main.route('/post',methods=['GET','POST'])
 def post():
     form=PostForm()
 
@@ -34,7 +34,7 @@ def view_comment(post_id):
     post=Blogpost.query.filter_by(id=post_id)
     comments=Comments.query.filter_by(blogpost_id=post_id).all()
     if not comments:
-        abort(404)
+        return redirect(url_for('main.new_comment'))
     title=f'comments section for {{post.title}}'
 
      return render_template('comment.html',title=title,post=post,comments=comments)
