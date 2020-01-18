@@ -6,8 +6,6 @@ class User(UserMixin,db.Model):
     id=db.Column(db.Integer,primary_key=True)
     name=db.Column(db.string(255),index=True)
     email=db.Column(db.text(),unique=True)
-    blog=db.relationship('Blogpost',bakref='blogpost.id',lazy='dynamic')
-    comment=db.relationship('Comments',bakref='comment',lazy='dynamic')
     pass_secure=db.Column(db.string(55))
 
     #method to save new user
@@ -24,7 +22,6 @@ class Blogpost(db.Model):
     title=db.column(db.string(255),index=True)
     content=db.column(db.text())
     date_posted=db.column(db.DateTime(),default=datetime.utcnow)
-    user_id=db.column(db.Integer,db.ForeigKey('users.id'))
     comments=db.relationship('Comments',backref='comment')
 
     #method to save a new blogpost
@@ -39,7 +36,6 @@ class Comments(db.Model):
 
     id=db.column(db.Integer,primary_key=True)
     content=db.column(db.text(),index=True)
-    user_id=db.column(db.Integer,db.ForeigKey('users.id'))
     blogpost_id=db.column(db.Integer,db.ForeigKey('blogpost.id'))
 
     #a method to save a new comments
