@@ -58,3 +58,9 @@ In case You have any issues using this code please do no hesitate to get in touc
 ## Known Bugs
 
 No known bugs
+
+## Technologies Used
+- Python3.6
+- Flask framework
+- Bootstrap
+- PostgreSQL
