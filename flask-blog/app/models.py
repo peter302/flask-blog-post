@@ -32,7 +32,7 @@ class User(UserMixin,db.Model):
     def password(self, password):
         self.password_secure = generate_password_hash(password)
 
-    def verify_password(self, password):
+    def check_password(self, password):
         return check_password_hash(self.password_secure, password)
 
 

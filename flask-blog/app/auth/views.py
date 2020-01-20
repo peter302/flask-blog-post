@@ -1,7 +1,8 @@
 from flask import render_template,redirect,url_for,request,flash
 from . import auth
-from flask_login import login_user,logout_user,login_required
+from flask_login import login_user,logout_user,login_required,current_user
 from ..models import User
+from ..import main
 from .forms import RegistrationForm, LoginForm
 from .. import db
 
@@ -26,16 +27,16 @@ def register():
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     login_form = LoginForm()
     if login_form.validate_on_submit():
-        user = User.query.filter_by(username=login_form.username.data).first()
-        if user is None or not user.check_password(form.password.data):
+        user = User.query.filter_by(email=login_form.email.data).first()
+        if user is None or not user.check_password(login_form.password.data):
             flash('Invalid username or password')
-            return redirect(url_for('login'))
+            return redirect(url_for('auth.login'))
         login_user(user, remember=login_form.remember_me.data)
-        return redirect(url_for('index'))
-    return render_template('login.html', title='Sign In', login_form=form)
+        return redirect(url_for('main.index'))
+    return render_template('auth/login.html', title='Sign In', login_form=login_form)
 
     title ="flask-blog|Login"
     return render_template('auth/login.html',login_form=login_form,title=title)
