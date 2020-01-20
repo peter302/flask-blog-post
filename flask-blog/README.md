@@ -28,6 +28,9 @@ This is a web application that allows various users to create posts. Users can a
 |Create a post | **Click** create a post | A page with a form to create a post will pop up |
 |Add a comment | **Click** Add Comment |A page with a form to create a comment will pop up  |
 
+## Prerequisites
+* Python3.6
+
 ## Setup/Installation Requirements
 * internet access
 * $ git clone https://github.com/peter302/flask-blog-post.git
