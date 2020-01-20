@@ -46,3 +46,7 @@ This is a web application that allows various users to create posts. Users can a
 
 * A user needs to sign up
 * A user the needs to sign in to vote and post pitches
+
+# CREDITS
+
+#### Google.com, StackOverflow.com and LMS
