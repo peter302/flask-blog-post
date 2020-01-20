@@ -54,3 +54,7 @@ This is a web application that allows various users to create posts. Users can a
 # Support and Contacts
 
 In case You have any issues using this code please do no hesitate to get in touch with me through petermbaik@gmail.com or leave a commit here on github.
+
+## Known Bugs
+
+No known bugs
