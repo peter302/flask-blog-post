@@ -1,8 +1,9 @@
 from flask import render_template,url_for,request,abort,redirect
-from ..models import Blogpost,User,Comments,
+from ..models import Blogpost,User,Comments
 from .import main
-from forms import CommentForm,PostForm,UpdateProfile
+from .forms import CommentForm,PostForm,UpdateProfile
 from flask_login import login_required,current_user
+from app import db
 
 @main.route('/')
 def index():
@@ -46,7 +47,7 @@ def update_profile(uname):
 
 
 
-        
+
 
 @main.route('/post',methods=['GET','POST'])
 @login_required
@@ -56,7 +57,6 @@ def post():
     if form.validate_on_submit():
         title=form.title.data
         content=form.content.data
-        date_posted=form.date_posted.data
 
         new_post=Blogpost(title=title,content=content)
         new_post.post_save()
@@ -65,32 +65,34 @@ def post():
     return render_template('post.html',title=title,postform=form)
 
 
-@main.route('/post/comment/<int:post_id>')
-@login_required
-def view_comment(post_id):
-    post=Blogpost.query.filter_by(id=post_id)
-    comments=Comments.query.filter_by(blogpost_id=post_id).all()
-    if not comments:
-        return redirect(url_for('main.new_comment'))
-    title=f'comments section for {{post.title}}'
+@main.route('/comment/<int:id>')
+def view_comment(id):
+    post=Blogpost.query.get(id)
 
-     return render_template('comment.html',title=title,post=post,comments=comments)
+    title='posts'
+
+    return render_template('comment.html',title=title,post=post)
 
 
 
 
-@main.route('/post/new_comment/<int:post_id>',methods=['GET','POST'])
-def new_comment(post_id):
-    post=Blogpost.query.filter_by(id=post_id)
-    form=commentform()
+@main.route('/post/new_comment/<int:id>',methods=['GET','POST'])
+def new_comment(id):
+    post=Blogpost.query.get(id)
+    form=CommentForm()
 
     if form.validate_on_submit():
         content=form.content.data
-        new_comment=Comments(content=content,blogpost_id=post.id)
+        new_comment=Comments(content=content,blogpost=post)
 
         new_comment.comment_save()
 
-        return redirect(url_for('main.view_comment'))
+        return redirect(url_for('main.view_comment',id=post.id))
     title='make a new comment here'
 
     return render_template('new_comment.html',title=title,post=post,commentform=form)
+
+@main.route('/post/comment/delete/<int:id>')
+def delete_comment(id):
+    post=Blogpost.query.get(id)
+    return (post.title)
