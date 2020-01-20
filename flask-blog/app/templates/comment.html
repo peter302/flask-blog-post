@@ -27,13 +27,21 @@
               </div>
              </div>
         </div>
+      </div><br>
 
-        <div class="col-md-4",style='background-color:blue;opacity:0.7;'>
 
-            <div class='card'style='background-color:grey;color:white'>
+        <div class="col-md-4">
+
+            <div class='card'>
               {% for comment in post.comments.all() %}
+              <ul>
+                <li style='list-style-type:none;'>
+
               <div class='card-body'>{{ comment.content }}</div>
               <div class='card-footer'><p><a href="{{url_for('main.delete_comment',id=post.id,comment_id=comment.id)}}">delete Comment</a></p></div>
+            </li>
+            </ul>
+
                {% endfor %}
             </div>
 

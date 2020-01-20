@@ -9,7 +9,7 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
-<body style='background-color:#4a8079;background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));'>
+<body style='background: white;'>
   <div>
         Microblog:
         <a href="{{ url_for('main.index') }}">Home</a>
@@ -21,14 +21,14 @@
     </div>
 
   <div class='container',style='justify-content:space-between'>
-  <h1>{{title}}</h1>
-    <h2><a href='/post'>make a post</a></h2>
+  <h1 style='text-align: center;'>{{title}} {{current_user.username}}</h1>
+    <h2 style='text-align: center;'><a href='/post'>Hello {{current_user.username}},create a new post here </a></h2>
       {%for post in posts%}
       <ul>
         <li style='list-style-type:none;'>
          <div class='row'>
           <div class=col-md-6>
-             <div class="card">
+             <div style='justify-content: center;'  class="card">
             <div class="card-header"><h3>{{post.title}}</h3></div>
             <div class="card-body"><p>{{post.content}}</p></div>
            <div class="card-footer"><p><a href="{{url_for('main.view_comment',id=post.id)}}">view comments</a></p></div>

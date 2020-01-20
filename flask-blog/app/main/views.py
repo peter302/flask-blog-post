@@ -10,7 +10,7 @@ def index():
     '''a function to take a user to the home page'''
 
     posts=Blogpost.query.all()
-    title="welcome to our new blog post"
+    title="welcome to our new blog post website"
 
     return render_template('index.html',title=title,posts=posts)
 
