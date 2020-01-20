@@ -19,3 +19,11 @@ This is a web application that allows various users to create posts. Users can a
 6. As a writer, I would also like to create a blog from the application.
 7. As a writer, I would like to delete comments that I find insulting or degrading.
 8. As a writer, I would like to update or delete blogs I have create
+
+
+## Specifications
+| Behaviour | Input | Output |
+| --------------- | :----------:| --------: |
+|Display blogposts |enter the site URL
+|Create a post | **Click** create a post | A page with a form to create a post will pop up |
+|Add a comment | **Click** Add Comment |A page with a form to create a comment will pop up  |
