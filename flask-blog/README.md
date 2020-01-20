@@ -64,3 +64,8 @@ No known bugs
 - Flask framework
 - Bootstrap
 - PostgreSQL
+
+
+### License
+
+**[MIT](./LICENSE)** (c) 2020 **[Peter Kuria](https://github.com/peter302/flask-blog-post.git)**
