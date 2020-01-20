@@ -10,16 +10,29 @@
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body style='background: white;'>
-  <div>
-        Microblog:
-        <a href="{{ url_for('main.index') }}">Home</a>
-        {% if current_user.is_anonymous %}
-        <a href="{{ url_for('auth.login') }}">Login</a>
-        {% else %}
-        <a href="{{ url_for('auth.logout') }}">Logout</a>
-        {% endif %}
-    </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('main.index') }}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        {% if current_user.is_anonymous %}
+        <a class="nav-link"href="{{ url_for('auth.login') }}">Login</a>
+          {% else %}
+          <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+          {% endif %}
+      </li>
+
+    </ul>
+
+  </div>
+</nav>
   <div class='container',style='justify-content:space-between'>
   <h1 style='text-align: center;'>{{title}} {{current_user.username}}</h1>
     <h2 style='text-align: center;'><a href='/post'>Hello {{current_user.username}},create a new post here </a></h2>
